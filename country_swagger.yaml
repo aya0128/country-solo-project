@@ -14,6 +14,8 @@ servers:
 tags:
   - name: location
     description: 国の名前と位置（緯度経度）を紐付けるAPI
+  - name: language
+    description: 国の名前と挨拶「こんにちは」を紐付けるAPI
 
 #--------------------------------------------
 # ここからエンドポイントの記載
@@ -119,7 +121,7 @@ paths:
                 countryName:
                   type: string
                   description: 国名
-                  example: Sample
+                  example: Sample2
       responses:
         200:
           description: リクエストが成功した場合
@@ -160,10 +162,26 @@ paths:
             schema:
               type: object
               properties:
+                code1:
+                  type: string
+                  description: 国コード1
+                  example: sa
+                code2:
+                  type: string
+                  description: 国コード2
+                  example: SAM
                 countryName:
                   type: string
                   description: 国名
-                  example: Sample2
+                  example: Sample
+                lat:
+                  type: number
+                  description: 緯度
+                  example: 22.1
+                lon:
+                  type: number
+                  description: 経度
+                  example: 123.1
       responses:
         200:
           description: リクエストが成功した場合
@@ -183,6 +201,46 @@ paths:
                   - message: "入力が足りません"
         500:
           description: サーバーでシステムエラーが発生した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
+  /language/:name:
+    get:
+      tags:
+        - language
+      summary: 国の名前から挨拶の取得
+      description: ・国名から挨拶を取得する。
+      parameters:
+        - in: path
+          name: name
+          description: 国の名前
+          schema:
+            type: string
+          required: true
+
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - countryName: "Japan"
+                    hello: "こんにちは"
+        400:
+          description: "パスが誤りの場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "国名が誤っています"
+        500:
+          description: "サーバーでシステムエラーが発生した場合"
           content:
             application/json:
               schema:

@@ -7,32 +7,39 @@ body {
 }
 
 h1 {
-  margin: 30px 40px 30px 40px;
-  font-weight: bold;
-  text-align: center;
-  color: #6091d3;
-  background: #fff;
-  border: solid 3px #6091d3;
-  border-radius: 10px;
+  background: #b0dcfa;
+  color: white;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 0.5em;
 }
 
-#locate {
-  color: #fff;
-  background-color: #00569c;
-  margin: 0px 0px 0px 1050px;
+h2 {
+  background: #b0dcfa;
+  padding: 0.5em;
+  color: white;
+  border-radius: 0.5em;
 }
 
-div.input {
-  background-color: green;
-  width: 200px;
-  height: 200px;
-  margin-left: auto;
-  margin-right: auto;
+table {
+  background-color: #fdfdfd;
+  border-collapse: collapse;
+  border: 3px solid #b0dcfa;
 }
 
-div#answer {
-  background-color: blue;
-  width: 300px;
-  margin-left: auto;
-  margin-right: auto;
+table td {
+  border-collapse: collapse;
+  border: 2px solid #b0dcfa;
+  vertical-align: top;
+}
+
+.space {
+  display: block;
+  content: "";
+  height: 80px;
+}
+
+.get {
+  float: left;
+  width: 20%;
 }
