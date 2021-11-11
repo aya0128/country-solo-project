@@ -14,17 +14,19 @@ servers:
 tags:
   - name: location
     description: 国の名前と位置（緯度経度）を紐付けるAPI
+  - name: language
+    description: 国の名前と挨拶「こんにちは」を紐付けるAPI
 
 #--------------------------------------------
 # ここからエンドポイントの記載
 #--------------------------------------------
 paths:
-  /location/{name}:
+  /location/country/:name:
     get:
       tags:
         - location
       summary: 国の名前から位置を取得する
-      description: ・　DBから緯度と経度の情報を取得する。
+      description: ・DBから緯度と経度の情報を取得する。
       parameters:
         - in: path
           name: name
@@ -41,10 +43,196 @@ paths:
               schema:
                 type: object
                 example:
-                  - latitude: 36
+                  - countryName: "Japan"
+                    latitude: 36
                     longitude: 138
         400:
-          description: "パスがない場合"
+          description: "パスが誤りの場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "国名が誤っています"
+        500:
+          description: "サーバーでシステムエラーが発生した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
+    delete:
+      tags:
+        - location
+      summary: 渡された国名に該当する国の情報を削除する。
+      description: ・DBから渡された国名に該当する国の情報を削除する。
+      parameters:
+        - in: path
+          name: name
+          description: 国の名前
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "成功しました！"
+        400:
+          description: "パスが誤りの場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "国名が誤っています"
+        500:
+          description: サーバーでシステムエラーが発生した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
+    patch:
+      tags:
+        - location
+      summary: 国の名前を変更する。
+      description: ・渡された国の国名を変更する。
+      parameters:
+        - in: path
+          name: name
+          description: 国の名前
+          schema:
+            type: string
+          required: true
+      requestBody:
+        description: 必須項目とする。
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                countryName:
+                  type: string
+                  description: 国名
+                  example: Sample2
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - countryName: "Japan"
+                    latitude: 36
+                    longitude: 138
+        400:
+          description: "パス誤りやバリデーションエラーの場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "パスもしくは情報が誤っています"
+        500:
+          description: "サーバーでシステムエラーが発生した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
+  /location/country:
+    post:
+      tags:
+        - location
+      summary: 国の名前と位置を追加する。
+      description: ・DBに国の名前と位置を追加する。
+      requestBody:
+        description: 全て必須項目とし、値が入っていない場合はサーバーでバリデーションエラー(400エラー)が返却される
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code1:
+                  type: string
+                  description: 国コード1
+                  example: sa
+                code2:
+                  type: string
+                  description: 国コード2
+                  example: SAM
+                countryName:
+                  type: string
+                  description: 国名
+                  example: Sample
+                lat:
+                  type: number
+                  description: 緯度
+                  example: 22.1
+                lon:
+                  type: number
+                  description: 経度
+                  example: 123.1
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "成功しました！"
+        400:
+          description: bodyの情報が不足している場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "入力が足りません"
+        500:
+          description: サーバーでシステムエラーが発生した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
+  /language/:name:
+    get:
+      tags:
+        - language
+      summary: 国の名前から挨拶の取得
+      description: ・国名から挨拶を取得する。
+      parameters:
+        - in: path
+          name: name
+          description: 国の名前
+          schema:
+            type: string
+          required: true
+
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - countryName: "Japan"
+                    hello: "こんにちは"
+        400:
+          description: "パスが誤りの場合"
           content:
             application/json:
               schema:

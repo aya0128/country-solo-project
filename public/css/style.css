@@ -1,0 +1,45 @@
+html {
+  height: 100%; /* make sure it is at least as tall as the viewport */
+  position: relative;
+}
+body {
+  height: 100%; /* force the BODY element to match the height of the HTML element */
+}
+
+h1 {
+  background: #b0dcfa;
+  color: white;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 0.5em;
+}
+
+h2 {
+  background: #b0dcfa;
+  padding: 0.5em;
+  color: white;
+  border-radius: 0.5em;
+}
+
+table {
+  background-color: #fdfdfd;
+  border-collapse: collapse;
+  border: 3px solid #b0dcfa;
+}
+
+table td {
+  border-collapse: collapse;
+  border: 2px solid #b0dcfa;
+  vertical-align: top;
+}
+
+.space {
+  display: block;
+  content: "";
+  height: 80px;
+}
+
+.get {
+  float: left;
+  width: 20%;
+}

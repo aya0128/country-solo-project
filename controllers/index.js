@@ -2,12 +2,10 @@ const express = require("express");
 
 const router = express.Router();
 
-const userRouter = require("./user");
-const channelRouter = require("./channel");
+const locationRouter = require("./location");
 
 module.exports = (models) => {
-  router.use("/users", userRouter(models));
-  router.use("/channels", channelRouter(models));
+  router.use("/location", locationRouter(models));
 
   return router;
 };
