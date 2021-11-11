@@ -24,7 +24,7 @@ paths:
       tags:
         - location
       summary: 国の名前から位置を取得する
-      description: ・　DBから緯度と経度の情報を取得する。
+      description: ・DBから緯度と経度の情報を取得する。
       parameters:
         - in: path
           name: name
@@ -65,7 +65,7 @@ paths:
       tags:
         - location
       summary: 国の位置から国の名前を取得する
-      description: ・　DBから国の名前を取得する。
+      description: ・DBから国の名前を取得する。
       parameters:
         - in: path
           name: lat
@@ -99,6 +99,64 @@ paths:
                   - message: "国名が誤っています"
         500:
           description: "サーバーでシステムエラーが発生した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
+  /location/country:
+    post:
+      tags:
+        - location
+      summary: 国の名前と位置を追加する。
+      description: ・DBに国の名前と位置を追加する。
+      requestBody:
+        description: 全て必須項目とし、値が入っていない場合はサーバーでバリデーションエラー(400エラー)が返却される
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code1:
+                  type: string
+                  description: 国コード(2文字)
+                  example: sa
+                code2:
+                  type: string
+                  description: 国コード(3文字)
+                  example: SAM
+                countryName:
+                  type: string
+                  description: 国名
+                  example: Sample
+                latitude:
+                  type: number
+                  description: 緯度
+                  example: 11
+                longitude:
+                  type: number
+                  description: 経度
+                  example: 30.2
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "成功しました！"
+        400:
+          description: bodyの情報が不足している場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "入力が足りません"
+        500:
+          description: サーバーでシステムエラーが発生した場合
           content:
             application/json:
               schema:

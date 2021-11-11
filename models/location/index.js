@@ -13,5 +13,6 @@ Locate.prototype.serialize = function() {
 };
 
 module.exports = (knex) => ({
-  getLocate: require("./get_locate")(knex, Locate),
+  getLocation: require("./get_location")(knex, Locate),
+  addCountryLocation: require("./add_location")(knex),
 });

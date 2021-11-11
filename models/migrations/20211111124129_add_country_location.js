@@ -7,7 +7,9 @@ exports.up = function(knex, Promise) {
 
     t.string("code2").notNullable();
 
-    t.string("country_name").notNullable();
+    t.string("country_name")
+      .unique()
+      .notNullable();
 
     t.float("lat").notNullable();
 
