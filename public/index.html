@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- name that appears on the tab at the top of the browser tab -->
+    <title>Country</title>
+    <!-- style sheet for project -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- require bootstrap css and javascript -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body ng-app="myApp">
+    <div ng-controller="CounrtryController">
+      <!-- display locate -->
+      <h1>Display locate</h1>
+      <table align="center" height="700" cellpadding="3">
+        <tr>
+          <div class="input">
+            <input type="text" name="countryName" id="countryName" />
+            <button type="button" id="locate"></button>
+          </div>
+          <div id="answer"></div>
+        </tr>
+      </table>
+    </div>
+    <!-- Modules -->
+    <script src="js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/CountryController.js"></script>
+  </body>
+</html>

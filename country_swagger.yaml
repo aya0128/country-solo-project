@@ -41,7 +41,8 @@ paths:
               schema:
                 type: object
                 example:
-                  - latitude: 36
+                  - countryName: "Japan"
+                    latitude: 36
                     longitude: 138
         400:
           description: "パスがない場合"

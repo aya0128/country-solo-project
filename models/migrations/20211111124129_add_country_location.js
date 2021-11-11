@@ -9,9 +9,9 @@ exports.up = function(knex, Promise) {
 
     t.string("country_name").notNullable();
 
-    t.number("lat").notNullable();
+    t.float("lat").notNullable();
 
-    t.number("lon").notNullable();
+    t.float("lon").notNullable();
   });
 };
 
