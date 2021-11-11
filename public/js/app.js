@@ -1,1 +1,1 @@
-const app = angular.module("myApp", []);
+const appCountry = angular.module("myAppCountry", []);
