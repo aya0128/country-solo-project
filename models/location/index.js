@@ -14,5 +14,7 @@ Locate.prototype.serialize = function() {
 
 module.exports = (knex) => ({
   getLocation: require("./get_location")(knex, Locate),
+  deleteCountryLocation: require("./delete_location")(knex),
   addCountryLocation: require("./add_location")(knex),
+  patchCountry: require("./patch_country")(knex),
 });
