@@ -1,0 +1,61 @@
+openapi: "3.0.0"
+info:
+  title: Country
+  description: 国情報
+  version: 1.0.0
+servers:
+  - url: http://{host}:{port}/v1
+    description: Solo prj
+    variables:
+      host:
+        default: localhost
+      port:
+        default: "3000"
+tags:
+  - name: location
+    description: 国の名前と位置（緯度経度）を紐付けるAPI
+
+#--------------------------------------------
+# ここからエンドポイントの記載
+#--------------------------------------------
+paths:
+  /location/{name}:
+    get:
+      tags:
+        - location
+      summary: 国の名前から位置を取得する
+      description: ・　DBから緯度と経度の情報を取得する。
+      parameters:
+        - in: path
+          name: name
+          description: 国の名前
+          schema:
+            type: string
+          required: true
+
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - latitude: 36
+                    longitude: 138
+        400:
+          description: "パスがない場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "国名が誤っています"
+        500:
+          description: "サーバーでシステムエラーが発生した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
