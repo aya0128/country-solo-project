@@ -1,5 +1,5 @@
 /* global app, $ */
-app.controller("CountryController", [
+appCountry.controller("CountryController", [
   "$scope",
   "$http",
   function($scope, $http) {

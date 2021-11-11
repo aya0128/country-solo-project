@@ -4,7 +4,7 @@ info:
   description: 国情報
   version: 1.0.0
 servers:
-  - url: http://{host}:{port}/v1
+  - url: http://{host}:{port}/
     description: Solo prj
     variables:
       host:
