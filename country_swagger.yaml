@@ -19,7 +19,7 @@ tags:
 # ここからエンドポイントの記載
 #--------------------------------------------
 paths:
-  /location/{name}:
+  /location/name/{name}:
     get:
       tags:
         - location
@@ -43,6 +43,51 @@ paths:
                 example:
                   - latitude: 36
                     longitude: 138
+        400:
+          description: "パスがない場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "国名が誤っています"
+        500:
+          description: "サーバーでシステムエラーが発生した場合"
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - message: "サーバーエラー発生"
+  /location/locate/{lat}/{lon}:
+    get:
+      tags:
+        - location
+      summary: 国の位置から国の名前を取得する
+      description: ・　DBから国の名前を取得する。
+      parameters:
+        - in: path
+          name: lat
+          description: 緯度
+          schema:
+            type: number
+          required: true
+        - in: path
+          name: lon
+          description: 経度
+          schema:
+            type: number
+          required: true
+
+      responses:
+        200:
+          description: リクエストが成功した場合
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  - name: Japan
         400:
           description: "パスがない場合"
           content:
