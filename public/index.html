@@ -28,7 +28,7 @@
               get
             </button>
             <span class="getlocation"
-              >{{country.countryName}}の緯度は{{country.latitude}}、経度は{{country.longitude}}です。</span
+              >{{countryName}}の緯度は{{lat}}、経度は{{lon}}です。</span
             >
           </td>
         </tr>
@@ -45,7 +45,7 @@
             <button type="button" class="get" ng-click="addCountryLocation()">
               追加
             </button>
-            <span class="addlocate">{{message}}</span>
+            <span class="addlocate">レスポンス：{{addmessage}}</span>
           </td>
         </tr>
         <tr>
@@ -59,18 +59,18 @@
             >
               削除
             </button>
-            <span class="deletelocate">{{message}}</span>
+            <span class="deletelocate">レスポンス：{{delmessage}}</span>
           </td>
         </tr>
         <tr>
           <td>
             <h2 align="center">国名変更</h2>
-            <input id="countryName" type="text" placeholder="変更前の国名" />
+            <input id="patchCountry" type="text" placeholder="変更前の国名" />
             <input id="newCountryName" type="text" placeholder="変更後の国名" />
             <button type="button" class="get" ng-click="patchCountry()">
               変更
             </button>
-            <span class="patchcountry">{{message}}</span>
+            <span class="patchcountry">レスポンス：{{patmessage}}</span>
           </td>
         </tr>
         <tr>

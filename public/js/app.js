@@ -7,16 +7,19 @@ app.controller("countryController", [
     $scope.countryName = null;
     $scope.lat = null;
     $scope.lon = null;
-    $scope.message = null;
+    $scope.addmessage = null;
+    $scope.delmessage = null;
+    $scope.patmessage = null;
 
     $scope.getLocation = function() {
       $scope.countryName = $("#getlocate")[0].value;
       $http
         .get(`http://localhost:3000/api/location/country/${$scope.countryName}`)
         .then((response) => {
-          $scope.countryName = response.countryName;
-          $scope.lat = response.latitude;
-          $scope.lon = response.longitude;
+          console.log(response.data[0]);
+          $scope.countryName = response.data[0].countryName;
+          $scope.lat = response.data[0].latitude;
+          $scope.lon = response.data[0].longitude;
         });
     };
 
@@ -27,7 +30,7 @@ app.controller("countryController", [
           `http://localhost:3000/api/location/country/${$scope.countryName}`
         )
         .then((response) => {
-          $scope.message = response.message;
+          $scope.delmessage = response.data.message;
         });
     };
 
@@ -45,20 +48,20 @@ app.controller("countryController", [
         data: postData,
         headers: { "Content-Type": "application/json" },
       }).then((response) => {
-        $scope.message = response.message;
+        $scope.addmessage = response.data.message;
       });
     };
 
     $scope.patchCountry = function() {
-      $scope.countryName = $("#deleteCountry")[0].value;
-      const patchData = { countryName: $("#countryName")[0].value };
+      $scope.countryName = $("#patchCountry")[0].value;
+      const patchData = { countryName: $("#newCountryName")[0].value };
       $http({
         method: "PATCH",
         url: `http://localhost:3000/api/location/country/${$scope.countryName}`,
         data: patchData,
         headers: { "Content-Type": "application/json" },
       }).then((response) => {
-        $scope.message = response.message;
+        $scope.patmessage = response.data.message;
       });
     };
   },
